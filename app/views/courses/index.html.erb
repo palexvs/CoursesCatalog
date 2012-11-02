@@ -2,7 +2,10 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
-<table class="table table-striped">
+
+<div id="alert-area"></div>
+
+<table class="table table-striped" id="courses-list">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
@@ -14,13 +17,13 @@
   </thead>
   <tbody>
     <% @courses.each do |course| %>
-      <tr>
+      <tr id="<%= dom_id(course) %>">
         <td><%= link_to course.id, course_path(course) %></td>
         <td><%= course.name %></td>
         <td><%= course.desc %></td>
         <td><%=l course.created_at %></td>
         <td>
-          <%= link_to "Trak it", track_course_path(course), :class => 'btn btn-mini', :method => :post %>
+          <%= link_to "Trak it", track_it_course_path(course), class: 'btn btn-mini track-it', remote: true, method: :post %>
 <!--           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_course_path(course), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

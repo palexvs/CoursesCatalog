@@ -12,6 +12,6 @@
 class Course < ActiveRecord::Base
   attr_accessible :desc, :name
 
-  has_many :track_its
-  has_many :users, :through => :track_its  
+  has_many :track_its, :dependent => :destroy
+  has_many :users, :through => :track_its
 end

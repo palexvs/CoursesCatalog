@@ -1,8 +1,7 @@
 class CoursesController < ApplicationController
+
   before_filter :authenticate_user!, except: [:index, :show]
   
-  # GET /courses
-  # GET /courses.json
   def index
     @courses = Course.all
 
@@ -83,21 +82,26 @@ class CoursesController < ApplicationController
     end
   end
 
-  def track
-    @course = Course.find(params[:id])
-    @user = current_user
-    @user.courses << @course
+  def track_it
+    course = Course.find(params[:id])
+    association = current_user.track_its.build(course: course)
 
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to root_path, notice: 'Course was successfully added to watch list.' }
-        # format.json { render json: @course, status: :created, location: @course }
+      if association.save
+        format.json { head :no_content }
       else
-        format.html { redirect_to root_path, notice: 'Failed to add course to watch list.' }
-        # format.html { render action: "new" }
-        # format.json { render json: @course.errors, status: :unprocessable_entity }
+        format.json { render :json => association.errors.full_messages, status: :unprocessable_entity }
       end
     end
-
   end
+
+  def my_courses
+    @courses = current_user.courses
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @courses }
+    end    
+  end
+
 end

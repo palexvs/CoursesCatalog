@@ -3,7 +3,10 @@ CoursesCatalog::Application.routes.draw do
 
   resources :courses do
     member do
-      post 'track'
+      post 'track_it'
+    end
+    collection do
+      get 'my_courses'
     end
   end
   root :to => 'courses#index'

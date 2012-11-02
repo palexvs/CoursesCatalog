@@ -28,6 +28,6 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
 
-  has_many :track_its
-  has_many :courses, :through => :track_its  
+  has_many :track_its, :dependent => :destroy, :validate => true
+  has_many :courses, :through => :track_its
 end

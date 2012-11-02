@@ -8,5 +8,6 @@ class CreateTrackIts < ActiveRecord::Migration
     end
     add_index :track_its, :user_id
     add_index :track_its, :course_id
+    add_index :track_its, [:user_id, :course_id], :name => "index_users_on_user_and_course", :unique => true
   end
 end

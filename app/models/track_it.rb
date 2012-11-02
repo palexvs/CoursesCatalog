@@ -10,7 +10,9 @@
 #
 
 class TrackIt < ActiveRecord::Base
+  attr_accessible :course
+  validates_uniqueness_of :course_id, :scope => :user_id, :message => "has already added to your list" 
+
   belongs_to :user
   belongs_to :course
-  # attr_accessible :title, :body
 end
