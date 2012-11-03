@@ -14,7 +14,7 @@
 @fontAwesomeSvgPath: asset-path("fontawesome-webfont.svg");
 
 // Font Awesome
-@import "fontawesome";
+// @import "fontawesome";
 
 // Your custom LESS stylesheets goes here
 //
@@ -27,6 +27,12 @@
 // Example:
 // @linkColor: #ff0000;
 
+/*-----------------
+  Common Overwrite
+------------------*/
+a.btn-primary:visited {
+  color: white;
+}
 
 /*----------------
   Courses List

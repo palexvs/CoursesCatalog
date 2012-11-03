@@ -8,6 +8,10 @@ jQuery ->
     .on('ajax:error', 'a.track-it', (xhr, err) -> HandleCommonErr(err))
     .on('ajax:success', 'a.track-it', (xhr, data) -> UpdateMyCourses())
 
+  $('#my_courses-widget')
+    .on('ajax:error', 'a.untrack-it', (xhr, err) -> HandleCommonErr(err))
+    .on('ajax:success', 'a.untrack-it', (xhr, data) -> UpdateMyCourses())    
+
 LoadWidgets = () ->
   UpdateMyCourses()
 
@@ -23,14 +27,9 @@ UpdateMyCourses = () ->
       $('#my_courses-widget').html MyCoursesWidgetTemplate(data)
 
 MyCoursesWidgetTemplate = (courses) ->
-  html = "<div class='well sidebar-nav'><h4>My courses</h4><ul>"
-  unless courses.length
-    html += "<i>empty</i>"
-  else
-    for course in courses
-      html += "<li>#{course.name}</li>" 
-  html += "</ul></div>"
+  html = SMT['courses/my_courses']({ courses: courses } );
 
 MarkMyCoursesInList = (courses) ->
+  $("#courses-list tr.tracked").removeClass("tracked")
   for course in courses
     $("#courses-list tr#course_#{course.id}").addClass("tracked")

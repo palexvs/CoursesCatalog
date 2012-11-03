@@ -82,19 +82,6 @@ class CoursesController < ApplicationController
     end
   end
 
-  def track_it
-    course = Course.find(params[:id])
-    association = current_user.track_its.build(course: course)
-
-    respond_to do |format|
-      if association.save
-        format.json { head :no_content }
-      else
-        format.json { render :json => association.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
-  end
-
   def my_courses
     @courses = current_user.courses
 

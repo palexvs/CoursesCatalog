@@ -21,6 +21,7 @@ group :assets do
   gem 'simple_form'
 end
 
+gem 'smt_rails'
 gem 'jquery-rails'
 gem 'devise'
 
