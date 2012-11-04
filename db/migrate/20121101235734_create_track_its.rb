@@ -1,8 +1,8 @@
 class CreateTrackIts < ActiveRecord::Migration
   def change
     create_table :track_its do |t|
-      t.references :user
-      t.references :course
+      t.references :user, null: false
+      t.references :course, null: false
 
       t.timestamps
     end

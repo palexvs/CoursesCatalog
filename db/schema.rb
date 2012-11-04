@@ -11,18 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121101235734) do
+ActiveRecord::Schema.define(:version => 20121103202250) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
     t.text     "desc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "start_by_schedule", :default => true
+  end
+
+  create_table "start_dates", :force => true do |t|
+    t.integer  "course_id",  :null => false
+    t.date     "start_on",   :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
+  add_index "start_dates", ["course_id", "start_on"], :name => "index_start_dates_on_course_id_and_start_on"
+  add_index "start_dates", ["course_id"], :name => "index_start_dates_on_course_id"
+
   create_table "track_its", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "course_id"
+    t.integer  "user_id",    :null => false
+    t.integer  "course_id",  :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

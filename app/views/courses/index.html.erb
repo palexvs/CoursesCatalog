@@ -26,12 +26,10 @@
           <%= link_to course_track_it_path(course), class: 'btn btn-mini track-it', remote: true, method: :post  do %>
             <i class="icon-eye-open"></i> Trak it</a>
           <% end%>
-<!--           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_course_path(course), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      course_path(course),
+<!--           <%= link_to 'Edit', edit_course_path(course), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', course_path(course),
                       :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :data => { :confirm => 'Are you sure?' },
                       :class => 'btn btn-mini btn-danger' %> -->
         </td>
       </tr>
@@ -39,6 +37,4 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_course_path,
-            :class => 'btn btn-primary' %>
+<%= link_to 'New', new_course_path, :class => 'btn btn-primary' %>

@@ -12,6 +12,11 @@ jQuery ->
     .on('ajax:error', 'a.untrack-it', (xhr, err) -> HandleCommonErr(err))
     .on('ajax:success', 'a.untrack-it', (xhr, data) -> UpdateMyCourses())    
 
+  $('form').on 'click', '.remove_fields', (event) ->
+    $(this).prev('input[type=hidden]').val('1')
+    $(this).closest('fieldset').hide()
+    event.preventDefault()
+    
 LoadWidgets = () ->
   UpdateMyCourses()
 

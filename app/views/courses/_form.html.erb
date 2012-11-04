@@ -1,20 +1,36 @@
-<%= form_for @course, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, :class => 'text_field' %>
+<%= simple_form_for @course, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset> 
+    <%= f.input :name, :required => true, :autofocus => true %>
+<!--     <%= f.input :desc %> -->
+    <%= f.input :start_by_schedule,:label => false, :inline_label => 'Start by schedule' %>
+
+    <div class="accordion" id="start-dates">
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#start-dates" href="#collapseOne">
+            Starts Dates
+          </a>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+          <div class="accordion-inner">
+            <%= f.fields_for :start_dates do |ff| %>
+              <fieldset>
+                <%= ff.text_field :start_on, class: "datepicker" %>
+                <%= ff.hidden_field :_destroy %>
+                <%= link_to '#', class: "remove_fields" do %>
+                  <i class="icon-remove"></i>
+                <% end %>
+              </fieldset>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :desc, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :desc, :class => 'text_area' %>
-    </div>
-  </div>
+
+  </fieldset> 
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                courses_path, :class => 'btn' %>
+    <%= link_to 'Cancel', courses_path, :class => 'btn' %>
   </div>
 <% end %>

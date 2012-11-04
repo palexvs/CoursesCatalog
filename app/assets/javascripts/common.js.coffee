@@ -1,3 +1,10 @@
+jQuery ->
+  $.datepicker.setDefaults
+    dateFormat: "yy-mm-dd",
+    firstDay: 1
+      
+  $('input.datepicker[type="text"]').datepicker()
+
 @HandleCommonErr= (errors) ->
   newAlert(msg, 'error') for msg in $.parseJSON(errors.responseText)
 
