@@ -65,7 +65,7 @@ class CoursesController < ApplicationController
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+        format.json { render json: @course.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
@@ -86,7 +86,6 @@ class CoursesController < ApplicationController
     @courses = current_user.courses
 
     respond_to do |format|
-      format.html # index.html.erb
       format.json { render json: @courses }
     end    
   end

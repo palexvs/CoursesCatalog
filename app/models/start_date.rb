@@ -13,8 +13,9 @@ class StartDate < ActiveRecord::Base
   attr_accessible :start_on
 
   validates :start_on, presence: true
-
   validates_uniqueness_of :start_on, :scope => :course_id
+
+  default_scope order("start_on desc")
 
   belongs_to :course
 end

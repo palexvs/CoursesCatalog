@@ -3,6 +3,7 @@ CoursesCatalog::Application.routes.draw do
 
   resources :courses do
     resource :track_it, only: [:create, :destroy]
+    resources :start_dates, only: [:create, :destroy, :index]
     collection do
       get 'my_courses'
     end

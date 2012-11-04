@@ -1,0 +1,11 @@
+<ul>
+  {{#start_dates}}
+    <li>
+      {{start_on}}
+      <a href='/courses/{{course_id}}/start_dates/{{id}}' title="Remove date" class='remove-date' data-method='delete' data-remote='true'> <i class='icon-remove'></i> </a>
+    </li>
+  {{/start_dates}}
+  {{^start_dates}}
+    <i>No dates</i>
+  {{/start_dates}}
+</ul>

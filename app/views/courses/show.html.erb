@@ -3,35 +3,13 @@
   <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 </div> -->
 
-<dl class="dl-horizontal">
-  <dt><strong>Name</strong></dt>
-  <dd><%= @course.name %></dd>
-<!--   <dt><strong><%= model_class.human_attribute_name(:desc) %>:</strong></dt>
-  <dd><%= @course.desc %></dd> -->
-</dl>
+<div id="alert-area"></div>
 
+<h3><%= @course.name %></h3>
 
-<div class="accordion" id="start-dates">
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#start-dates" href="#collapseOne">
-        Starts Dates
-      </a>
-    </div>
-    <div id="collapseOne" class="accordion-body collapse in">
-      <div class="accordion-inner">
-        <ul>
-        <% @course.start_dates.each do |start_date| %>
-          <li><%= start_date.start_on %></li>
-        <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render 'courses/start_dates' %>
 
 <div class="form-actions">
-  <%= link_to 'Back', courses_path, :class => 'btn'  %>
   <%= link_to 'Edit', edit_course_path(@course), :class => 'btn' %>
   <%= link_to 'Destroy', course_path(@course), :method => 'delete', :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger' %>
 </div>

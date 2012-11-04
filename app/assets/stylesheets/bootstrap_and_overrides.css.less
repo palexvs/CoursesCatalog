@@ -51,7 +51,22 @@ a.btn-primary:visited {
 .alert {
   margin-bottom: 0;
 }
+/*--------
+ DEBUG BOX
+--------*/
+.box_sizing {
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box;
+}
 
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  .box_sizing;
+}
 
 /*----------------------
   Sticky footer styles
@@ -95,4 +110,58 @@ body {
     padding-left: 20px;
     padding-right: 20px;
   }
+}
+
+/*----------------
+  Start Dates List
+-----------------*/
+.start-dates-list-widget {
+  display: table;
+  min-width: 150px;
+
+  background-color: @white;
+  border: 1px solid #999;
+  border: 1px solid rgba(0,0,0,.3);
+  *border: 1px solid #999; /* IE6-7 */
+  .border-radius(6px);
+
+  .header {
+    padding: 0 15px;
+    border-bottom: 1px solid #eee;
+    // Close icon
+    // .close { margin-top: 2px; }
+    // Heading
+    .icon-chevron-up,
+    .icon-chevron-down {
+      float: right;
+    }
+    .icon-chevron-down {
+      display: none;
+    }
+    .icon-chevron-up {
+      display: block;
+    }    
+    .collapsed  {
+      .icon-chevron-down {
+        display: block;
+      }
+      .icon-chevron-up {
+        display: none;
+      }
+    }
+    h3 {
+      margin: 0;
+      line-height: 30px;
+    }  
+  }
+
+  .body {
+    a.add-date {
+      margin: 0px 15px 10px;
+    }
+  }  
+
+  input#datepicker {
+    display: none;
+  }  
 }
