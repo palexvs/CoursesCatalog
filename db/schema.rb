@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(:version => 20121103202250) do
   create_table "courses", :force => true do |t|
     t.string   "name"
     t.text     "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.boolean  "start_by_schedule", :default => true
   end
 
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20121103202250) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "start_dates", ["course_id", "start_on"], :name => "index_start_dates_on_course_id_and_start_on"
+  add_index "start_dates", ["course_id", "start_on"], :name => "index_start_dates_on_course_id_and_start_on", :unique => true
   add_index "start_dates", ["course_id"], :name => "index_start_dates_on_course_id"
 
   create_table "track_its", :force => true do |t|

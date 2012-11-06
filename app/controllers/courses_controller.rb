@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
   
   def index
-    @courses = Course.all
+    @courses = Course.with_closest_start_date
 
     respond_to do |format|
       format.html # index.html.erb
