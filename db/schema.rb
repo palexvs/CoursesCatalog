@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121103202250) do
+ActiveRecord::Schema.define(:version => 20121107132726) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -19,17 +19,26 @@ ActiveRecord::Schema.define(:version => 20121103202250) do
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
     t.boolean  "start_by_schedule", :default => true
+    t.integer  "created_by",                          :null => false
+    t.string   "publish_status",                      :null => false
   end
 
+  add_index "courses", ["created_by", "publish_status"], :name => "index_courses_on_created_by_and_publish_status"
+  add_index "courses", ["created_by"], :name => "index_courses_on_created_by"
+
   create_table "start_dates", :force => true do |t|
-    t.integer  "course_id",  :null => false
-    t.date     "start_on",   :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "course_id",      :null => false
+    t.date     "start_on",       :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "created_by",     :null => false
+    t.string   "publish_status", :null => false
   end
 
   add_index "start_dates", ["course_id", "start_on"], :name => "index_start_dates_on_course_id_and_start_on", :unique => true
   add_index "start_dates", ["course_id"], :name => "index_start_dates_on_course_id"
+  add_index "start_dates", ["created_by", "publish_status"], :name => "index_start_dates_on_created_by_and_publish_status"
+  add_index "start_dates", ["created_by"], :name => "index_start_dates_on_created_by"
 
   create_table "track_its", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -55,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20121103202250) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "role"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -1,6 +1,5 @@
-<%- model_class = Course -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+  <h1><%= controller.controller_name.capitalize %></h1>
 </div>
 
 <div id="alert-area"></div>
@@ -8,14 +7,15 @@
 <table class="table table-striped" id="courses-list">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:desc) %></th>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Descriptyion</th>
       <th>Closest start</th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
+
     <% @courses.each do |course| %>
       <tr id="<%= dom_id(course) %>">
         <td><%= link_to course.id, course_path(course) %></td>
@@ -23,18 +23,12 @@
         <td><%= course.desc %></td>
         <td><%= course.date %></td>
         <td>
-          <%= link_to course_track_it_path(course), class: 'btn btn-mini track-it', remote: true, method: :post  do %>
-            <i class="icon-eye-open"></i> Trak it</a>
-          <% end%>
-<!--           <%= link_to 'Edit', edit_course_path(course), :class => 'btn btn-mini' %>
-          <%= link_to 'Destroy', course_path(course),
-                      :method => :delete,
-                      :data => { :confirm => 'Are you sure?' },
-                      :class => 'btn btn-mini btn-danger' %> -->
+          <%= link_to course_track_it_path(course), class: 'btn btn-mini track-it', format: :json, remote: true, method: :post  do %> <i class="icon-eye-open"></i> Trak it</a> <% end%>
         </td>
       </tr>
     <% end %>
+
   </tbody>
 </table>
 
-<%= link_to 'New', new_course_path, :class => 'btn btn-primary' %>
+<%= link_to 'New', new_course_path, :class => 'btn btn-primary' if can?(:create, Course) %>

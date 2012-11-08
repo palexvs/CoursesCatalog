@@ -1,5 +1,4 @@
 class CoursesController < ApplicationController
-
   before_filter :authenticate_user!, except: [:index, :show]
   
   def index
@@ -11,10 +10,9 @@ class CoursesController < ApplicationController
     end
   end
 
-  # GET /courses/1
-  # GET /courses/1.json
   def show
     @course = Course.find(params[:id])
+    authorize! :read, @course
 
     respond_to do |format|
       format.html # show.html.erb
@@ -22,8 +20,6 @@ class CoursesController < ApplicationController
     end
   end
 
-  # GET /courses/new
-  # GET /courses/new.json
   def new
     @course = Course.new
 
@@ -33,15 +29,13 @@ class CoursesController < ApplicationController
     end
   end
 
-  # GET /courses/1/edit
   def edit
     @course = Course.find(params[:id])
   end
 
-  # POST /courses
-  # POST /courses.json
   def create
     @course = Course.new(params[:course])
+    @course.created_by = current_user.id
 
     respond_to do |format|
       if @course.save
@@ -49,13 +43,11 @@ class CoursesController < ApplicationController
         format.json { render json: @course, status: :created, location: @course }
       else
         format.html { render action: "new" }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+        format.json { render json: @course.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
 
-  # PUT /courses/1
-  # PUT /courses/1.json
   def update
     @course = Course.find(params[:id])
 

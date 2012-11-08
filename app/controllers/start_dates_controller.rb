@@ -12,6 +12,7 @@ class StartDatesController < ApplicationController
   def create
     course = Course.find(params[:course_id])
     start_date = course.start_dates.build(start_on: params[:start_on])
+    start_date.created_by = current_user.id
 
     respond_to do |format|
       if start_date.save

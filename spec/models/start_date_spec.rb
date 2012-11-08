@@ -2,16 +2,18 @@
 #
 # Table name: start_dates
 #
-#  id         :integer          not null, primary key
-#  course_id  :integer          not null
-#  start_on   :date             not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id             :integer          not null, primary key
+#  course_id      :integer          not null
+#  start_on       :date             not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  created_by     :integer          not null
+#  publish_status :string(255)      not null
 #
 
 require 'spec_helper'
 
-describe Course do
+describe StartDate do
 
   before do
     @c = build(:course)
@@ -22,6 +24,8 @@ describe Course do
 
   it { should respond_to(:course_id) }
   it { should respond_to(:start_on) }
+  it { should respond_to(:created_by) }
+  it { should respond_to(:publish_status) }  
   it { should be_valid }  
 
 # Tests for date

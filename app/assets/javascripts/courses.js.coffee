@@ -17,6 +17,9 @@ jQuery ->
     .on('ajax:success', 'a.remove-date', (xhr, data) -> UpdateStartDatesList() )
     .on('click', 'a.add-date', () -> ShowDatepicker())
 
+LoadWidgets = () ->
+  UpdateMyCourses()
+
 ShowDatepicker = () ->
   $('#start-dates-list-widget #datepicker').datepicker
     showButtonPanel: true
@@ -43,12 +46,9 @@ UpdateStartDatesList = () ->
     url: "/courses/#{course_id}/start_dates"
     dataType: 'json'
     error: (jqXHR, textStatus, errorThrown) ->
-      HandleCommonErr(textStatus)
+      HandleCommonErr(jqXHR)
     success: (data, textStatus, jqXHR) ->
       $('#start-dates-list-widget fieldset').html SMT['courses/start_dates_list']({ course_id: course_id, start_dates: data } )
-
-LoadWidgets = () ->
-  UpdateMyCourses()
 
 UpdateMyCourses = () ->
   $.ajax
@@ -56,7 +56,8 @@ UpdateMyCourses = () ->
     url: '/courses/my_courses'
     dataType: 'json'
     error: (jqXHR, textStatus, errorThrown) ->
-      HandleCommonErr(textStatus)
+      $('#my_courses-widget').html SMT['courses/my_courses']({  } )
+      HandleCommonErr(jqXHR)
     success: (data, textStatus, jqXHR) ->
       MarkMyCoursesInList(data)
       $('#my_courses-widget').html SMT['courses/my_courses']({ courses: data } )

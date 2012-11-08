@@ -26,11 +26,13 @@ group :development, :test do
   gem 'rspec-rails'#, '2.11.4'
   gem 'factory_girl_rails'#, '4.1.0'
   gem 'database_cleaner'#, '0.9.1'  
+  gem 'hirb'
 end
 
 gem 'smt_rails'
 gem 'jquery-rails'
 gem 'devise'
+gem 'cancan'
 
 gem 'annotate', '~> 2.5.0', group: :development
 

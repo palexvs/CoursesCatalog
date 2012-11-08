@@ -8,6 +8,8 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  start_by_schedule :boolean          default(TRUE)
+#  created_by        :integer          not null
+#  publish_status    :string(255)      not null
 #
 
 require 'spec_helper'
@@ -15,7 +17,8 @@ require 'spec_helper'
 describe Course do
 
   before do
-    @c = build(:course)
+    @u = create(:user)
+    @c = build(:course, created_by: @u.id)
   end
 
   subject { @c }
@@ -26,6 +29,12 @@ describe Course do
   # it { should respond_to(:url) }
   # it { should respond_to(:university_id) }
   # it { should respond_to(:status) }
+  it { should respond_to(:created_by) }
+  it { should respond_to(:publish_status) }
+
+  it { @c.created_by == @u.id }
+  it { @c.publish_status == "publish" }
+
   it { should be_valid }  
 
 # Tests for name

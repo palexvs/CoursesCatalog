@@ -15,9 +15,11 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  role                   :string(255)
 #
 
 class User < ActiveRecord::Base
+  ROLES = %w[admin user]
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -28,6 +30,22 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
 
+  validates :role, presence: true, :inclusion => { :in => ROLES }, :on => :update
+
   has_many :track_its, :dependent => :destroy, :validate => true
   has_many :courses, :through => :track_its
+
+  before_create :set_role
+
+  def set_role(role = "user")
+    self.role = role
+  end
+
+  def admin?
+    role == "admin"
+  end
+
+  def user?
+    role == "user"
+  end  
 end
