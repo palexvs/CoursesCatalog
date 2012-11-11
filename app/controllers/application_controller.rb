@@ -2,6 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+    flash[:alert] = exception.message  
+    respond_to do |format|  
+      format.json { render :json=> {}, :status => :forbidden }  
+      format.html { redirect_to root_url }  
+    end     
   end  
 end

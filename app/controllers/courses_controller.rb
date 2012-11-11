@@ -1,8 +1,9 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
+  load_and_authorize_resource :except => [:my_courses]
   
   def index
-    @courses = Course.with_closest_start_date
+    @courses = @courses.with_closest_start_date.publish_only
 
     respond_to do |format|
       format.html # index.html.erb
@@ -11,9 +12,6 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course = Course.find(params[:id])
-    authorize! :read, @course
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @course }
@@ -21,8 +19,6 @@ class CoursesController < ApplicationController
   end
 
   def new
-    @course = Course.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @course }
@@ -30,11 +26,10 @@ class CoursesController < ApplicationController
   end
 
   def edit
-    @course = Course.find(params[:id])
   end
 
   def create
-    @course = Course.new(params[:course])
+    # @course = Course.new(params[:course])
     @course.created_by = current_user.id
 
     respond_to do |format|
@@ -49,7 +44,8 @@ class CoursesController < ApplicationController
   end
 
   def update
-    @course = Course.find(params[:id])
+    
+    authorize! :publish, @course if params[:course] && params[:course][:publish_status] == "publish"
 
     respond_to do |format|
       if @course.update_attributes(params[:course])
@@ -62,24 +58,13 @@ class CoursesController < ApplicationController
     end
   end
 
-  # DELETE /courses/1
-  # DELETE /courses/1.json
   def destroy
-    @course = Course.find(params[:id])
     @course.destroy
 
     respond_to do |format|
       format.html { redirect_to courses_url }
       format.json { head :no_content }
     end
-  end
-
-  def my_courses
-    @courses = current_user.courses
-
-    respond_to do |format|
-      format.json { render json: @courses }
-    end    
   end
 
 end

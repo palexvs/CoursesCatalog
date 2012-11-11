@@ -8,8 +8,11 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.user?
-      can :read, :all
-      can :manage, [Course, StartDate], :created_by => user.id, :publish_status => "draft"
+      can :read, Course, :publish_status => "publish"
+      can :manage, Course, :publish_status => "draft", :created_by => user.id
+      can [:read, :create], Course, :publish_status => "pending", :created_by => user.id
+
+      can :manage, TrackIt, :user_id => user.id
     else
       can :read, Course, :publish_status => "publish"
     end

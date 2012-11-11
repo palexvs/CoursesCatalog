@@ -17,6 +17,8 @@ class TrackIt < ActiveRecord::Base
 
   validates_uniqueness_of :course_id, :scope => :user_id, :message => "has already added to your list"
 
+  scope :with_course, includes(:course)
+
   belongs_to :user
   belongs_to :course
 end

@@ -1,14 +1,14 @@
 <div class="well sidebar-nav">
   <h4>My courses</h4>
   <ul>
-    {{#courses}}
+    {{#track_its}}
       <li>
-        {{name}}
-        <a href='/courses/{{id}}/track_it' title="Stop tracking" class='untrack-it' data-method='delete' data-remote='true'><i class='icon-remove'></i></a>
+        {{course.name}}
+        <a href='/courses/{{course_id}}/track_its/{{id}}' title="Stop tracking" class='untrack-it' data-method='delete' data-remote='true'><i class='icon-remove'></i></a>
       </li>
-    {{/courses}}
-    {{^courses}}
+    {{/track_its}}
+    {{^track_its}}
       <i>You list is empty</i>
-    {{/courses}}    
+    {{/track_its}}    
   </ul>
 </div>

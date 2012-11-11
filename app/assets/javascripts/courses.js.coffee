@@ -53,16 +53,16 @@ UpdateStartDatesList = () ->
 UpdateMyCourses = () ->
   $.ajax
     type: 'GET'
-    url: '/courses/my_courses'
+    url: '/track_its/'
     dataType: 'json'
     error: (jqXHR, textStatus, errorThrown) ->
       $('#my_courses-widget').html SMT['courses/my_courses']({  } )
       HandleCommonErr(jqXHR)
     success: (data, textStatus, jqXHR) ->
       MarkMyCoursesInList(data)
-      $('#my_courses-widget').html SMT['courses/my_courses']({ courses: data } )
+      $('#my_courses-widget').html SMT['courses/my_courses']({ track_its: data } )
 
-MarkMyCoursesInList = (courses) ->
+MarkMyCoursesInList = (track_its) ->
   $("#courses-list tr.tracked").removeClass("tracked")
-  for course in courses
-    $("#courses-list tr#course_#{course.id}").addClass("tracked")
+  for track_it in track_its
+    $("#courses-list tr#course_#{track_it.course_id}").addClass("tracked")

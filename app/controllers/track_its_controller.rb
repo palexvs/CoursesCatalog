@@ -1,28 +1,40 @@
 class TrackItsController < ApplicationController
   before_filter :authenticate_user!
+  # load_resource :user
+  load_and_authorize_resource :course, :find_by => :find_by_id
+  load_and_authorize_resource :track_it, :through => [:course, :current_user], :find_by => :find_by_id
+
+  respond_to :json
+
+  def index
+    @track_its = @track_its.with_course
+
+    render json: @track_its.to_json(include: :course)
+  end  
 
   def create
-    course = Course.find(params[:course_id])
-    association = current_user.track_its.build(course: course)
+    if @track_it.course_id.nil? 
+      render :json => "Can't start track it", status: :unprocessable_entity
+      return
+    end
 
-    respond_to do |format|
-      if association.save
-        format.json { head :no_content }
-      else
-        format.json { render :json => association.errors.full_messages, status: :unprocessable_entity }
-      end
+    if @track_it.save
+      head :no_content
+    else
+      render :json => @track_it.errors.full_messages, status: :unprocessable_entity
     end
   end
 
   def destroy
-    association = current_user.track_its.where(course_id: params[:course_id]).first
+    if @track_it.nil? 
+      render :json => "Can't untrack it", status: :unprocessable_entity
+      return
+    end
 
-    respond_to do |format|
-      if association.destroy
-        format.json { head :no_content }
-      else
-        format.json { render json: association.errors, status: :unprocessable_entity }
-      end
+    if @track_it.destroy
+      head :no_content
+    else
+      render json: @track_it.errors, status: :unprocessable_entity
     end
   end
 

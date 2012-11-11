@@ -2,12 +2,13 @@ CoursesCatalog::Application.routes.draw do
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
   
   resources :courses do
-    resource :track_it, only: [:create, :destroy]
+    resources :track_its, only: [:create, :destroy]
     resources :start_dates, only: [:create, :destroy, :index]
     collection do
       get 'my_courses'
     end
   end
+  resources :track_its, only: [:index]
   root :to => 'courses#index'
 
   # The priority is based upon order of creation:

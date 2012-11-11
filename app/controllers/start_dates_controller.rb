@@ -1,5 +1,5 @@
 class StartDatesController < ApplicationController
-  before_filter :authenticate_user!
+  # before_filter :authenticate_user!
 
   def index
     course = Course.find(params[:course_id])
