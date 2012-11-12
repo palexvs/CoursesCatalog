@@ -27,7 +27,7 @@ group :development, :test do
   gem 'hirb'
 end
 
-gem 'sass-rails'#,   '~> 3.2.3'
+# gem 'sass-rails'#,   '~> 3.2.3'
 gem 'simple_form'
 gem 'smt_rails'
 gem 'jquery-rails'
