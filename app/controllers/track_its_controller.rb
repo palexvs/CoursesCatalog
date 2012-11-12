@@ -12,11 +12,6 @@ class TrackItsController < ApplicationController
   end  
 
   def create
-    if @track_it.course_id.nil? 
-      render :json => "Can't start track it", status: :unprocessable_entity
-      return
-    end
-
     if @track_it.save
       head :no_content
     else
@@ -25,11 +20,6 @@ class TrackItsController < ApplicationController
   end
 
   def destroy
-    if @track_it.nil? 
-      render :json => "Can't untrack it", status: :unprocessable_entity
-      return
-    end
-
     if @track_it.destroy
       head :no_content
     else

@@ -25,6 +25,7 @@ class StartDate < ActiveRecord::Base
   scope :publish_only, where('publish_status = ?', 'publish')
 
   belongs_to :course
+  belongs_to :user, :foreign_key => "created_by"
 
   before_validation :set_default_publish_status
 

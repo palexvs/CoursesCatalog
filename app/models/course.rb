@@ -23,6 +23,7 @@ class Course < ActiveRecord::Base
 
   has_many :track_its, :dependent => :destroy
   has_many :users, :through => :track_its
+  belongs_to :user, :foreign_key => "created_by"
 
   has_many :start_dates, :dependent => :destroy
 

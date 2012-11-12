@@ -10,6 +10,7 @@ class StartDatesController < ApplicationController
   end
 
   def create
+    # @start_date.created_by = current_user.id
     respond_to do |format|
       if @start_date.save
         format.json { head :no_content }
@@ -20,7 +21,6 @@ class StartDatesController < ApplicationController
   end
 
   def update
-    
     authorize! :publish, @start_date if params[:start_date] && params[:start_date][:publish_status] == "publish"
 
     if @start_date.update_attributes(params[:start_date])
