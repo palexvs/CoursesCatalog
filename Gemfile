@@ -19,7 +19,6 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
   gem 'twitter-bootstrap-rails'
-  gem 'simple_form'
 end
 
 group :development, :test do
@@ -29,6 +28,7 @@ group :development, :test do
   gem 'hirb'
 end
 
+gem 'simple_form'
 gem 'smt_rails'
 gem 'jquery-rails'
 gem 'devise'
