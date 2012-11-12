@@ -12,7 +12,7 @@
 #
 
 class StartDate < ActiveRecord::Base
-  PUBLISH_STATUS = %w[publish pending draft]
+  PUBLISH_STATUS = %w[publish pending]
 
   attr_accessible :start_on, :publish_status
 
@@ -21,7 +21,20 @@ class StartDate < ActiveRecord::Base
   validates :created_by, presence: true
   validates :publish_status, presence: true, :inclusion => { :in => PUBLISH_STATUS }
 
-  default_scope order("start_on desc")
+  default_scope order("start_on asc")
+  scope :publish_only, where('publish_status = ?', 'publish')
 
   belongs_to :course
+
+  before_validation :set_default_publish_status
+
+  def pending?
+    publish_status == "pending"
+  end
+
+  private
+  def set_default_publish_status
+    self.publish_status ||= "pending"
+  end
+    
 end

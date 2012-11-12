@@ -9,7 +9,7 @@
   
   <div id="start-dates-list-collapse" class="body collapse in">
     <fieldset>
-      <%= render "courses/start_dates_list", :mustache => {course_id: @course.id, start_dates: @course.start_dates} %> 
+      <%= render (current_user.admin? ? "admin/courses/start_dates_list" : "courses/start_dates_list"), :mustache => {course_id: @course.id, start_dates: @course.start_dates} %> 
     </fieldset>
 
     <input id="datepicker">

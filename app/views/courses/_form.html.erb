@@ -2,26 +2,26 @@
   <h1><%= controller.action_name.capitalize + " " + controller.controller_name.singularize.capitalize %></h2>
 </div>
 
+<div id="alert-area"></div>
+
 <%= simple_form_for @course, :html => { :class => 'form-horizontal course-edit' } do |f| %>
 
-  <% if @course.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
-      <ul>
-      <% @course.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'alert_msgs', object: @course %>
 
   <fieldset> 
     <%= f.input :name, :required => true, :input_html => {:class => "input-block-level"} %>
     <%= f.input :start_by_schedule,:label => false, :inline_label => 'Start by schedule' %>
-    <%= f.input :publish_status, :collection => Course::PUBLISH_STATUS, :include_blank => false, :selected => "draft" %>
+    <% if current_user.admin? %>
+      <%= f.input :publish_status, :collection => Course::PUBLISH_STATUS, :include_blank => false %>
+    <% end %>
   </fieldset> 
 
-  <%= render 'courses/start_dates' unless %w[new create].include?(controller.action_name) %>
+  <% unless %w[new create].include?(controller.action_name) %>
+    <label class="string control-label">Start Dates</label>
+    <div class="controls">
+      <%= render 'courses/start_dates' %>
+    </div>
+  <% end %>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

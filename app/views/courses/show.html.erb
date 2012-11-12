@@ -4,9 +4,19 @@
 
 <%= render 'courses/start_dates' %>
 
-<% if can? :update, @course %>
-<div class="form-actions">
-  <%= link_to 'Edit', edit_course_path(@course), :class => 'btn' %>
-  <%= link_to 'Destroy', course_path(@course), :method => 'delete', :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger' %>
-</div>
+<% if can? :manage, @course %>
+  <div class="form-actions">
+    <%= link_to 'Edit', edit_course_path(@course), :class => 'btn' %>
+    <%= link_to 'Destroy', course_path(@course), :method => 'delete', :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger' %>
+
+    <% if @course.draft? %>
+      <%= link_to 'Publish', course_path(@course, :course => { :publish_status => (can?(:publish,@course) ? "publish" : "pending") }), :class => 'btn', :method => :put %>
+    <% end %>
+
+    <% if @course.pending? && current_user.admin? %>
+      <%= link_to 'Approve', course_path(@course, :course => { :publish_status => "publish" }), :class => 'btn', :method => :put %>
+      <%= link_to 'Not Approve', course_path(@course, :course => { :publish_status => "draft" }), :class => 'btn', :method => :put %>
+    <% end %>
+
+  </div>
 <% end %>

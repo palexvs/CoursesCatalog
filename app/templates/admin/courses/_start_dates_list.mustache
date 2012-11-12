@@ -1,0 +1,14 @@
+<ul>
+  {{#start_dates}}
+    <li>
+      {{start_on}}
+      <a href='/courses/{{course_id}}/start_dates/{{id}}' title="Remove date" class='remove-date' data-method='delete' data-remote='true'> <i class='icon-remove'></i></a>
+      {{#pending?}}
+        <a href='/courses/{{course_id}}/start_dates/{{id}}?start_date%5Bpublish_status%5D=publish' title="Approve date" class='approve-date' data-method='put' data-remote='true'> <i class='icon-ok'></i></a>
+      {{/pending?}}
+    </li>
+  {{/start_dates}}
+  {{^start_dates}}
+    <i>No dates</i>
+  {{/start_dates}}
+</ul>

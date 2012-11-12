@@ -13,7 +13,7 @@
 #
 
 class Course < ActiveRecord::Base
-  PUBLISH_STATUS = %w[publish pending draft]
+  PUBLISH_STATUS = %w[draft pending publish]
   
   attr_accessible :name, :desc, :start_by_schedule, :publish_status
 
@@ -28,15 +28,33 @@ class Course < ActiveRecord::Base
 
   scope :publish_only, where('publish_status = ?', 'publish')
   scope :with_closest_start_date, Course.select("courses.*, nd.date")
-    .joins('LEFT OUTER JOIN 
-        (select course_id, min(start_on) as date from start_dates where start_on > \''+(Date.today-7).to_s(:db)+'\' group by course_id ) as nd 
-      ON nd.course_id = courses.id')
+    .joins("LEFT OUTER JOIN 
+        (SELECT course_id, min(start_on) as date FROM start_dates WHERE start_on > '"+(Date.today-7).to_s(:db)+"' AND publish_status = 'publish' GROUP BY course_id ) as nd 
+      ON nd.course_id = courses.id").order("nd.date asc")
 
 
   after_save :remove_start_dates, :if => "!start_by_schedule"
+  before_validation :set_default_publish_status
+
+  def draft?
+    publish_status == "draft"
+  end
+
+  def pending?
+    publish_status == "pending"
+  end
+
+  def publish?
+    publish_status == "publish"
+  end    
 
   private
+
   def remove_start_dates
     self.start_dates.destroy_all
+  end
+
+  def set_default_publish_status
+    self.publish_status ||= "draft"
   end
 end

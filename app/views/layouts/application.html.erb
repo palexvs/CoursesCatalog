@@ -25,7 +25,7 @@
             <div class="span9">
 
               <% flash.each do |name, msg| %>
-                <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+                <div class="alert fade in alert-<%= name == :notice ? "success" : "error" %>">
                   <a class="close" data-dismiss="alert">×</a>
                   <%= msg %>
                 </div>
@@ -52,6 +52,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "admin" if current_user.admin? %>
 
   </body>
 </html>
