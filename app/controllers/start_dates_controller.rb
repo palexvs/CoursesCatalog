@@ -1,21 +1,15 @@
 class StartDatesController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource :course, :find_by => :find_by_id
-  load_and_authorize_resource :through => :course, :find_by => :find_by_id  
+  load_and_authorize_resource :course
+  load_and_authorize_resource :start_date, :through => [:course, :current_user]
 
   def index
-    # course = Course.find(params[:course_id])
-
     respond_to do |format|
       format.json { render json: @start_dates.to_json(:methods => ["pending?"]) }
     end        
   end
 
   def create
-    # course = Course.find(params[:course_id])
-    # start_date = course.start_dates.build(start_on: params[:start_on])
-    @start_date.created_by = current_user.id
-
     respond_to do |format|
       if @start_date.save
         format.json { head :no_content }
@@ -37,8 +31,6 @@ class StartDatesController < ApplicationController
   end  
 
   def destroy
-    # @start_date = StartDate.find(params[:id])
-
     respond_to do |format|
       if @start_date.destroy
         format.json { head :no_content }

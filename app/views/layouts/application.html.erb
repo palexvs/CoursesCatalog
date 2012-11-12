@@ -52,7 +52,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag "admin" if current_user.admin? %>
+    <%= javascript_include_tag "admin" if user_signed_in? && current_user.admin? %>
 
   </body>
 </html>

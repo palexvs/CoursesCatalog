@@ -27,6 +27,7 @@ class Course < ActiveRecord::Base
   has_many :start_dates, :dependent => :destroy
 
   scope :publish_only, where('publish_status = ?', 'publish')
+  scope :with_start_dates, includes(:start_date)
   scope :with_closest_start_date, Course.select("courses.*, nd.date")
     .joins("LEFT OUTER JOIN 
         (SELECT course_id, min(start_on) as date FROM start_dates WHERE start_on > '"+(Date.today-7).to_s(:db)+"' AND publish_status = 'publish' GROUP BY course_id ) as nd 

@@ -3,7 +3,7 @@
   <ul>
     {{#track_its}}
       <li>
-        {{course.name}}
+        <a href='/courses/{{course_id}}/'>{{course.name}}</a>
         <a href='/courses/{{course_id}}/track_its/{{id}}' title="Stop tracking" class='untrack-it' data-method='delete' data-remote='true'><i class='icon-remove'></i></a>
       </li>
     {{/track_its}}

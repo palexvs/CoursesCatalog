@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
-  load_and_authorize_resource :except => [:my_courses]
+  load_and_authorize_resource 
   
   def index
     @courses = @courses.with_closest_start_date.publish_only
@@ -29,9 +29,6 @@ class CoursesController < ApplicationController
   end
 
   def create
-    # @course = Course.new(params[:course])
-    @course.created_by = current_user.id
-
     respond_to do |format|
       if @course.save
         format.html { redirect_to @course, notice: 'Course was successfully created.' }

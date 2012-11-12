@@ -17,10 +17,8 @@ class Ability
       cannot :publish, Course
 
       can :read, StartDate, :publish_status => "publish"
-      can :manage, StartDate, :publish_status => "draft", :created_by => user.id
       can [:read, :create], StartDate, :publish_status => "pending", :created_by => user.id
-
-      cannot :publish, StartDate      
+      cannot :publish, StartDate
 
       can :manage, TrackIt, :user_id => user.id
     else

@@ -1,7 +1,7 @@
 class TrackItsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource :course, :find_by => :find_by_id
-  load_and_authorize_resource :track_it, :through => [:course, :current_user], :find_by => :find_by_id
+  load_and_authorize_resource :course
+  load_and_authorize_resource :track_it, :through => [:course, :current_user]
 
   respond_to :json
 

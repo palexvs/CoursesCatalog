@@ -9,10 +9,14 @@
   
   <div id="start-dates-list-collapse" class="body collapse in">
     <fieldset>
-      <%= render (current_user.admin? ? "admin/courses/start_dates_list" : "courses/start_dates_list"), :mustache => {course_id: @course.id, start_dates: @course.start_dates} %> 
+      <%= render (user_signed_in? && current_user.admin? ? "admin/courses/start_dates_list" : "courses/start_dates_list"), :mustache => {course_id: @course.id, start_dates: @course.start_dates.accessible_by(current_ability).to_a} %> 
     </fieldset>
 
-    <input id="datepicker">
-    <%= link_to "+ Add", "#", class: "add-date btn btn-mini" %>
+    <% if can? :create, StartDate %>
+      <div class="footer">
+        <input id="datepicker">
+        <%= link_to "+ Add", "#", class: "add-date btn btn-mini" %>
+      </div>
+    <% end %>
   </div>
 </div>
