@@ -7,7 +7,7 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.admin?
       can :manage, :all
-
+      can :create, Course, :created_by => user.id
       can :manage, TrackIt, :user_id => user.id
     elsif user.user?
       can :read, Course, :publish_status => "publish"
