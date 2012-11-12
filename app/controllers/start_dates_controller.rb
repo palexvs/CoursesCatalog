@@ -10,7 +10,6 @@ class StartDatesController < ApplicationController
   end
 
   def create
-    # @start_date.created_by = current_user.id
     respond_to do |format|
       if @start_date.save
         format.json { head :no_content }
