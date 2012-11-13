@@ -1,7 +1,14 @@
-<div class="course-show">
+<div class="course-show <%= dom_id(@course) %>">
   <div id="alert-area"></div>
 
-  <h3><%= @course.name %> <%=raw show_publish_status(@course) %></h3>
+  <h3>
+    <%= @course.name %>
+    <% if @course.publish? %>
+      <%= link_to course_track_its_path(@course), class: 'btn btn-mini track-it', format: :json, remote: true, method: :post  do %> <i class="icon-eye-open"></i> Trak it</a> <% end %>
+    <% else %>
+      <%= show_publish_status(@course) %> 
+    <% end %>
+  </h3>
 
   <%= render 'courses/start_dates' %>
 

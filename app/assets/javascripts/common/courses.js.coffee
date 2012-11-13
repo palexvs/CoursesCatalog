@@ -4,7 +4,7 @@
 jQuery ->
   LoadWidgets()
 
-  $('#courses-list')
+  $('#courses-list, .course-show')
     .on('ajax:error', 'a.track-it', (xhr, err) -> HandleCommonErr(err))
     .on('ajax:success', 'a.track-it', (xhr, data) -> UpdateMyCourses())
 
@@ -28,6 +28,6 @@ UpdateMyCourses = () ->
       $('#my_courses-widget').html SMT['courses/my_courses']({ track_its: data } )
 
 MarkMyCoursesInList = (track_its) ->
-  $("#courses-list tr.tracked").removeClass("tracked")
+  $(".tracked").removeClass("tracked")
   for track_it in track_its
-    $("#courses-list tr#course_#{track_it.course_id}").addClass("tracked")
+    $(".course_#{track_it.course_id}").addClass("tracked")

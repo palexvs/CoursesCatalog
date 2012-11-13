@@ -16,7 +16,7 @@
   <tbody>
 
     <% @courses.each do |course| %>
-      <tr id="<%= dom_id(course) %>">
+      <tr class="<%= dom_id(course) %>">
         <td class="name"><%= link_to course.name, course_path(course) %></td>
         <!-- <td class="desc"><%= course.desc %></td> -->
         <td class="date"><%= course.start_by_schedule ? course.date : 'open' %></td>
