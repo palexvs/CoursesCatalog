@@ -34,14 +34,35 @@ a.btn-primary:visited {
   color: white;
 }
 
-h3 .publish-status.label {
-  vertical-align: super;
+.clear {
+  clear: both;
+}
+
+/*-----------------
+  Course Show Form
+------------------*/
+.course-show {
+  h3 .publish-status.label {
+    vertical-align: super;
+  }
+  .start-dates-list-widget {
+    float: right;
+  }
 }
 
 /*----------------
   Courses List
 ----------------*/
 #courses-list {
+  .name {
+    // width: 50%;
+  }
+  .date {
+    width: 90px;
+  }
+  .control {
+    width: 70px;
+  }
   .tracked {
     a.track-it {
       display: none;

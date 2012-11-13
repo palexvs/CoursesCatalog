@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121107132726) do
+ActiveRecord::Schema.define(:version => 20121113105637) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20121107132726) do
     t.boolean  "start_by_schedule", :default => true
     t.integer  "created_by",                          :null => false
     t.string   "publish_status",                      :null => false
+    t.string   "link"
   end
 
   add_index "courses", ["created_by", "publish_status"], :name => "index_courses_on_created_by_and_publish_status"

@@ -1,22 +1,39 @@
-<div id="alert-area"></div>
+<div class="course-show">
+  <div id="alert-area"></div>
 
-<h3><%= @course.name %> <%=raw show_publish_status(@course) %></h3>
+  <h3><%= @course.name %> <%=raw show_publish_status(@course) %></h3>
 
-<%= render 'courses/start_dates' %>
+  <%= render 'courses/start_dates' %>
 
-<% if can? :manage, @course %>
-  <div class="form-actions">
-    <%= link_to 'Edit', edit_course_path(@course), :class => 'btn' %>
-    <%= link_to 'Destroy', course_path(@course), :method => 'delete', :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger' %>
+  <dl>
 
-    <% if @course.draft? %>
-      <%= link_to 'Publish', course_path(@course, :course => { :publish_status => (can?(:publish,@course) ? "publish" : "pending") }), :class => 'btn', :method => :put %>
+    <% if !@course.link.blank? %>
+      <dt>Link:</dt>
+      <dd><%= link_to @course.link, @course.link, target: "_blank" %></dd>
     <% end %>
 
-    <% if @course.pending? && current_user.admin? %>
-      <%= link_to 'Approve', course_path(@course, :course => { :publish_status => "publish" }), :class => 'btn', :method => :put %>
-      <%= link_to 'Not Approve', course_path(@course, :course => { :publish_status => "draft" }), :class => 'btn', :method => :put %>
-    <% end %>
 
-  </div>
-<% end %>
+    <% if !@course.desc.blank? %>
+      <dt>About:</td>
+      <dd><%= @course.desc %></dd>
+    <% end %>
+  </dl>
+
+  <div class="clear"></div>
+  <% if can? :manage, @course %>
+    <div class="form-actions">
+      <%= link_to 'Edit', edit_course_path(@course), :class => 'btn' %>
+      <%= link_to 'Destroy', course_path(@course), :method => 'delete', :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger' %>
+
+      <% if @course.draft? %>
+        <%= link_to 'Publish', course_path(@course, :course => { :publish_status => (can?(:publish,@course) ? "publish" : "pending") }), :class => 'btn', :method => :put %>
+      <% end %>
+
+      <% if @course.pending? && current_user.admin? %>
+        <%= link_to 'Approve', course_path(@course, :course => { :publish_status => "publish" }), :class => 'btn', :method => :put %>
+        <%= link_to 'Not Approve', course_path(@course, :course => { :publish_status => "draft" }), :class => 'btn', :method => :put %>
+      <% end %>
+
+    </div>
+  <% end %>
+</div>

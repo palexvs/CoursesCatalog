@@ -7,9 +7,8 @@
 <table class="table table-striped" id="courses-list">
   <thead>
     <tr>
-      <th>Id</th>
       <th>Name</th>
-      <th>Descriptyion</th>
+      <!-- <th>Description</th> -->
       <th>Closest start</th>
       <th></th>
     </tr>
@@ -18,11 +17,10 @@
 
     <% @courses.each do |course| %>
       <tr id="<%= dom_id(course) %>">
-        <td><%= link_to course.id, course_path(course) %></td>
-        <td><%= course.name %></td>
-        <td><%= course.desc %></td>
-        <td><%= course.date %></td>
-        <td>
+        <td class="name"><%= link_to course.name, course_path(course) %></td>
+        <!-- <td class="desc"><%= course.desc %></td> -->
+        <td class="date"><%= course.start_by_schedule ? course.date : 'open' %></td>
+        <td class="control">
           <%= link_to course_track_its_path(course), class: 'btn btn-mini track-it', format: :json, remote: true, method: :post  do %> <i class="icon-eye-open"></i> Trak it</a> <% end%>
         </td>
       </tr>

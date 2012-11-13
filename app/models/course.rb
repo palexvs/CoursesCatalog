@@ -10,14 +10,16 @@
 #  start_by_schedule :boolean          default(TRUE)
 #  created_by        :integer          not null
 #  publish_status    :string(255)      not null
+#  link              :string(255)
 #
 
 class Course < ActiveRecord::Base
   PUBLISH_STATUS = %w[draft pending publish]
   
-  attr_accessible :name, :desc, :start_by_schedule, :publish_status
+  attr_accessible :name, :link, :desc, :start_by_schedule, :publish_status
 
   validates :name, presence: true, length: { minimum: 5, maximum: 255 }
+  validates :link, presence: true, length: { minimum: 5, maximum: 255 }
   validates :created_by, presence: true
   validates :publish_status, presence: true, :inclusion => { :in => PUBLISH_STATUS }
 

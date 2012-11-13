@@ -10,6 +10,7 @@
 #  start_by_schedule :boolean          default(TRUE)
 #  created_by        :integer          not null
 #  publish_status    :string(255)      not null
+#  link              :string(255)
 #
 
 require 'spec_helper'
