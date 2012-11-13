@@ -15,8 +15,8 @@ describe TrackIt do
 
   before do
     @u = create(:user)
-    @c = create(:course)
-    @t = @u.track_its.build( course: @c )
+    @c = create(:course, user: @u)
+    @t = build(:track_it, course: @c, user: @u)
   end
 
   subject { @t }

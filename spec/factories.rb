@@ -13,6 +13,7 @@ FactoryGirl.define do
   factory :course do 
     name "Algorithms: Design and Analysis, Part 2"
     desc ""
+    link 'http://test.com'
     # created_by :created_by
     publish_status "publish"
 
@@ -24,6 +25,14 @@ FactoryGirl.define do
       publish_status "pending"
     end
 
+  end
+
+  factory :start_date do
+    start_on (Date.today).to_s(:db)
+    publish_status "publish"
+  end
+
+  factory :track_it do
   end
 
 end

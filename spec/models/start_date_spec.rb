@@ -16,8 +16,9 @@ require 'spec_helper'
 describe StartDate do
 
   before do
-    @c = build(:course)
-    @d = @c.start_dates.build(start_on: (Date.today).to_s(:db))
+    @u = create(:user)
+    @c = create(:course, created_by: @u.id)
+    @d = build(:start_date, course_id: @c.id, created_by: @u.id)
   end
 
   subject { @d }

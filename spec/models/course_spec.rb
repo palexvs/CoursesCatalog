@@ -27,7 +27,7 @@ describe Course do
   it { should respond_to(:name) }
   it { should respond_to(:desc) }
   it { should respond_to(:start_by_schedule) }
-  # it { should respond_to(:url) }
+  it { should respond_to(:link) }
   # it { should respond_to(:university_id) }
   # it { should respond_to(:status) }
   it { should respond_to(:created_by) }
@@ -58,6 +58,27 @@ describe Course do
     before { @c.name = "a" * 4 }
     it { should_not be_valid }
   end   
+
+# Tests for link
+  describe "when link is empty" do
+    before { @c.link = "" }
+    it { should_not be_valid }
+  end
+
+  describe "when link lenght > 255" do
+    before { @c.link = "a" * 256 }
+    it { should_not be_valid }
+  end
+
+  describe "when link lenght == 255" do
+    before { @c.link = "a" * 255 }
+    it { should be_valid }
+  end  
+
+  describe "when link lenght < 5" do
+    before { @c.link = "a" * 4 }
+    it { should_not be_valid }
+  end
 
 # Tests for desc
   describe "when desc is empty" do
