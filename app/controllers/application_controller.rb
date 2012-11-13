@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
     respond_to do |format|  
-      format.json { render :json => exception.message , :status => :forbidden }  
+      format.json { render :json => exception.message , :status => :not_found }  
       format.html { redirect_to root_url, :alert => exception.message }  
     end     
   end  

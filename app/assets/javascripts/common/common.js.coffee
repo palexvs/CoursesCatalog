@@ -5,7 +5,7 @@ jQuery ->
     dateFormat: "yy-mm-dd",
     firstDay: 1
     
-  $(".alert-success").alert().delay(2000).fadeOut("slow", -> $(this).remove() )
+  $(".alert-success").delay(2000).fadeOut("slow", -> $(this).remove() )
 
 @HandleCommonErr= (errors) ->
   try 

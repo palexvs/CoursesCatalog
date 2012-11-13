@@ -12,19 +12,13 @@ class TrackItsController < ApplicationController
   end  
 
   def create
-    if @track_it.save
-      head :no_content
-    else
-      render :json => @track_it.errors.full_messages, status: :unprocessable_entity
-    end
+    @track_it.save
+    respond_with(@course, @track_it)
   end
 
   def destroy
-    if @track_it.destroy
-      head :no_content
-    else
-      render json: @track_it.errors, status: :unprocessable_entity
-    end
+    @track_it.destroy
+    respond_with(@course, @track_it)
   end
 
 end

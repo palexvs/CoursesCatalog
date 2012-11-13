@@ -3,40 +3,27 @@ class StartDatesController < ApplicationController
   load_and_authorize_resource :course
   load_and_authorize_resource :start_date, :through => [:course, :current_user]
 
+  respond_to :json
+
   def index
-    respond_to do |format|
-      format.json { render json: @start_dates.to_json(:methods => ["pending?"]) }
-    end        
+    render json: @start_dates.to_json(:methods => ["pending?"])
   end
 
   def create
-    respond_to do |format|
-      if @start_date.save
-        format.json { head :no_content }
-      else
-        format.json { render :json => @start_date.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
+    @start_date.save
+    respond_with(@course, @start_date)
   end
 
   def update
     authorize! :publish, @start_date if params[:start_date] && params[:start_date][:publish_status] == "publish"
 
-    if @start_date.update_attributes(params[:start_date])
-      head :no_content
-    else
-      render json: @start_date.errors.full_messages, status: :unprocessable_entity
-    end
+    @start_date.update_attributes(params[:start_date])
+    respond_with(@course, @start_date)
   end  
 
   def destroy
-    respond_to do |format|
-      if @start_date.destroy
-        format.json { head :no_content }
-      else
-        format.json { render json: @start_date.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
+    @start_date.destroy
+    respond_with(@course, @start_date)    
   end
 
 end
