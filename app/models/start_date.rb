@@ -23,6 +23,7 @@ class StartDate < ActiveRecord::Base
 
   default_scope order("start_on asc")
   scope :publish_only, where('publish_status = ?', 'publish')
+  scope :pending_only, where("publish_status = ?", "pending")
 
   belongs_to :course
   belongs_to :user, :foreign_key => "created_by"

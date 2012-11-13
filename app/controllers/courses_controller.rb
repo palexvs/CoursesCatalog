@@ -11,6 +11,11 @@ class CoursesController < ApplicationController
     end
   end
 
+  def pending_list
+    @courses = @courses.where("publish_status = ? OR id IN (?)", "pending", StartDate.pending_only.pluck(:course_id).uniq )
+    render json: @courses
+  end
+
   def show
     respond_to do |format|
       format.html # show.html.erb

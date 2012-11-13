@@ -1,6 +1,11 @@
 <ul>
   {{#start_dates}}
+  {{#pending?}}
+    <li class="pending">
+  {{/pending?}}
+  {{^pending?}}
     <li>
+  {{/pending?}}
       {{start_on}}
       <a href='/courses/{{course_id}}/start_dates/{{id}}' title="Remove date" class='remove-date' data-method='delete' data-remote='true'> <i class='icon-remove'></i></a>
       {{#pending?}}

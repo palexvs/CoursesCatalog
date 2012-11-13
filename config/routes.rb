@@ -5,7 +5,7 @@ CoursesCatalog::Application.routes.draw do
     resources :track_its, only: [:create, :destroy]
     resources :start_dates
     collection do
-      get 'my_courses'
+      get 'pending_list'
     end
   end
   resources :track_its, only: [:index]

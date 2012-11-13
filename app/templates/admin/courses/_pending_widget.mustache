@@ -1,0 +1,13 @@
+<div class="well sidebar-nav">
+  <h4>Pending courses</h4>
+  <ul>
+    {{#courses}}
+      <li>
+        <a href='/courses/{{id}}/'>{{name}}</a>
+      </li>
+    {{/courses}}
+    {{^courses}}
+      <i>You list is empty</i>
+    {{/courses}}    
+  </ul>
+</div>
