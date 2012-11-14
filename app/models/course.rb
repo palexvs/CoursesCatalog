@@ -39,17 +39,12 @@ class Course < ActiveRecord::Base
   after_save :remove_start_dates, :if => "!start_by_schedule"
   before_validation :set_default_publish_status
 
-  def draft?
-    publish_status == "draft"
-  end
 
-  def pending?
-    publish_status == "pending"
+  PUBLISH_STATUS.each do |status|
+    define_method "#{status}?".to_sym do
+      publish_status == status
+    end
   end
-
-  def publish?
-    publish_status == "publish"
-  end    
 
   private
 

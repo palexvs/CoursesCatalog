@@ -30,8 +30,10 @@ class StartDate < ActiveRecord::Base
 
   before_validation :set_default_publish_status
 
-  def pending?
-    publish_status == "pending"
+  PUBLISH_STATUS.each do |status|
+    define_method "#{status}?".to_sym do
+      publish_status == status
+    end
   end
 
   private
