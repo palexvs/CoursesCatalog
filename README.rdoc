@@ -2,6 +2,6 @@
 
 It's catalog of online courses
 
-== Demo
+=== Demo
 
 link:http://coursecatalog.herokuapp.com
