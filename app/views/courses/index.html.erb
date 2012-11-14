@@ -4,29 +4,18 @@
 
 <div id="alert-area"></div>
 
-<table class="table table-striped" id="courses-list">
+<table id="courses-list" class="display table table-striped" data-source="<%= courses_url(format: "json") %>">
   <thead>
     <tr>
       <th>Name</th>
-      <!-- <th>Description</th> -->
-      <th>Closest start</th>
+      <th>Date</th>
       <th></th>
     </tr>
   </thead>
+
   <tbody>
-
-    <% @courses.each do |course| %>
-      <tr class="<%= dom_id(course) %>">
-        <td class="name"><%= link_to course.name, course_path(course) %></td>
-        <!-- <td class="desc"><%= course.desc %></td> -->
-        <td class="date"><%= course.start_by_schedule ? course.date : 'open' %></td>
-        <td class="control">
-          <%= link_to course_track_its_path(course), class: 'btn btn-mini track-it', format: :json, remote: true, method: :post  do %> <%= glyph('eye-open') %> Trak it</a> <% end%>
-        </td>
-      </tr>
-    <% end %>
-
   </tbody>
+
 </table>
 
 <%= link_to 'New', new_course_path, :class => 'btn btn-primary' if can?(:create, Course) %>

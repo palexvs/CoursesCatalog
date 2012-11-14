@@ -4,6 +4,34 @@
 jQuery ->
   LoadWidgets()
 
+  $.extend( $.fn.dataTableExt.oStdClasses, {
+      "sSortAsc": "header headerSortDown",
+      "sSortDesc": "header headerSortUp",
+      "sSortable": "header",
+      "sSortableNone": "header"
+  } )
+
+  $.extend( $.fn.dataTableExt.oJUIClasses, {
+      "sSortAsc": "header headerSortDown",
+      "sSortDesc": "header headerSortUp",
+      "sSortable": "header",
+      "sSortableNone": "header"
+  } )  
+
+  $('#courses-list').dataTable
+    # sDom: "<'row'<'span5'l><'span4'f>r>t<'row'<'span9'i><'span9'p>>"
+    "sDom": "<'row'<'span4'l><'span5'f>r>t<'row'<'span4'i><'span5'p>>",
+    sPaginationType: "bootstrap"
+    bJQueryUI: true
+    bProcessing: true
+    bServerSide: true
+    sAjaxSource: $('#courses-list').data('source')
+    aoColumns: [
+      null,
+      {"sWidth": "90px"},
+      {"sWidth": "70px", "bSortable": false},
+    ] 
+
   $('#courses-list, .course-show')
     .on('ajax:error', 'a.track-it', (xhr, err) -> HandleCommonErr(err))
     .on('ajax:success', 'a.track-it', (xhr, data) -> UpdateMyCourses())

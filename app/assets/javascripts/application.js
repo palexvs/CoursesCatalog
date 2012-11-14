@@ -14,7 +14,8 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require_tree ./common/
+//= require dataTables/jquery.dataTables
+//= require dataTables/jquery.dataTables.bootstrap
 //= require mustache
 //= require_tree ../../templates/courses/
-
+//= require_tree ./common/

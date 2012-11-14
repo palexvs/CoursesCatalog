@@ -6,8 +6,12 @@ class CoursesController < ApplicationController
   
   def index
     @courses = @courses.with_closest_start_date.publish_only
+    @track_course_ids =  user_signed_in? ? current_user.track_its.pluck(:course_id).uniq : []
 
-    respond_with(@courses)
+    respond_to do |format|
+      format.html
+      format.json { render json: CoursesDatatable.new(view_context, @courses, @track_course_ids) }
+    end
   end
 
   def pending_list
