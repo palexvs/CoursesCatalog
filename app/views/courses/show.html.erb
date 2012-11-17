@@ -22,7 +22,7 @@
 
     <% if !@course.desc.blank? %>
       <dt>About:</td>
-      <dd><%= @course.desc %></dd>
+      <dd><%=raw @course.desc %></dd>
     <% end %>
   </dl>
 

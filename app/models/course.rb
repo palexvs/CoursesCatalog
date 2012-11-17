@@ -38,6 +38,7 @@ class Course < ActiveRecord::Base
 
   after_save :remove_start_dates, :if => "!start_by_schedule"
   before_validation :set_default_publish_status
+  before_save :clean_desc
 
 
   PUBLISH_STATUS.each do |status|
@@ -47,6 +48,13 @@ class Course < ActiveRecord::Base
   end
 
   private
+
+  def clean_desc
+    self.desc = Sanitize.clean(desc, 
+                     :elements => ['b','a', 'i', 'u', 'ul', 'ol', 'li', 'blockquote', 'div', 'h1', 'h2', 'br' ],
+                     :attributes => {'a' => ['href', 'title', 'target']},
+                     :protocols => {'a' => {'href' => ['http', 'https']}})    
+  end
 
   def remove_start_dates
     self.start_dates.destroy_all

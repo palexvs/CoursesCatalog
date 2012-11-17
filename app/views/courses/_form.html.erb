@@ -11,7 +11,7 @@
   <fieldset> 
     <%= f.input :name, :required => true, :input_html => {:class => "input-block-level"} %>
     <%= f.input :link, :required => true, :input_html => {:class => "input-block-level"} %>
-    <%= f.input :desc, :input_html => {:class => "input-block-level"} %>
+    <%= f.input :desc, :input_html => {:class => "input-block-level wysihtml5"} %>
     
     <%= f.input :start_by_schedule,:label => false, :inline_label => 'Start by schedule', :input_html => { :onclick => "$('.control-group.start-dates-list').toggle()" } %>
     <% unless %w[new create].include?(controller.action_name) %>

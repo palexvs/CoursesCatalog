@@ -101,4 +101,16 @@ describe Course do
     it { should be_valid }
   end
 
+  describe "when try put in desc illegal html tags"
+    describe "'<script>...</script>'" do
+      before do 
+        @c.desc = '<script> function myFunction() {alert("I am an alert box!"); } </script> ' 
+        @c.save
+        @c.reload
+      end
+      it { @c.desc.should == ' function myFunction() {alert("I am an alert box!"); } ' }
+    end  
+  end
+
+
 end

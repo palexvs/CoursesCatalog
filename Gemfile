@@ -29,6 +29,8 @@ group :development, :test do
   gem 'hirb'
 end
 
+gem 'sanitize'
+gem 'bootstrap-wysihtml5-rails'
 gem 'will_paginate'
 gem 'twitter-bootstrap-rails'
 gem 'simple_form'

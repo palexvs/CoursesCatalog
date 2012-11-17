@@ -16,6 +16,9 @@
 //= require twitter/bootstrap
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap
+//= require bootstrap-wysihtml5
+//= require bootstrap-wysihtml5/locales/ru-RU
+//= require bootstrap-wysihtml5/locales/es-ES
 //= require mustache
 //= require_tree ../../templates/courses/
 //= require_tree ./common/

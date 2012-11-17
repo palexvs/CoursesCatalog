@@ -4,6 +4,10 @@ jQuery ->
   $.datepicker.setDefaults
     dateFormat: "yy-mm-dd",
     firstDay: 1
+
+  $('.wysihtml5').each((i, elem) -> $(elem).wysihtml5(
+    "image": false
+  ))
     
   $(".alert-success").delay(2000).fadeOut("slow", -> $(this).remove() )
 
