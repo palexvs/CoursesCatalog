@@ -9,14 +9,14 @@
   
   <div id="start-dates-list-collapse" class="body collapse in">
     <fieldset>
-      <% if @course.start_by_schedule %>
+      <% if %w[edit].include?(controller.action_name) || @course.start_by_schedule %>
         <%= render (user_signed_in? && current_user.admin? ? "admin/courses/start_dates_list" : "courses/start_dates_list"), :mustache => {course_id: @course.id, start_dates: @course.start_dates.accessible_by(current_ability).to_a} %> 
       <% else %>
         <span class="label label-success">Always open</label>
       <% end %>
     </fieldset>
 
-    <% if can?(:create, StartDate)  && @course.start_by_schedule %>
+    <% if can?(:create, StartDate) && (%w[edit].include?(controller.action_name) || @course.start_by_schedule ) %>
       <div class="footer">
         <input id="datepicker">
         <%= link_to "+ Add", "#", class: "add-date btn btn-mini" %>
