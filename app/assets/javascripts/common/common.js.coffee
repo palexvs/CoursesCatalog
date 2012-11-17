@@ -7,6 +7,7 @@ jQuery ->
 
   $('.wysihtml5').each((i, elem) -> $(elem).wysihtml5(
     "image": false
+    "html": true
   ))
     
   $(".alert-success").delay(2000).fadeOut("slow", -> $(this).remove() )

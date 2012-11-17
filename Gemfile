@@ -30,7 +30,7 @@ group :development, :test do
 end
 
 gem 'sanitize'
-gem 'bootstrap-wysihtml5-rails'
+gem 'bootstrap-wysihtml5-rails', :require => 'bootstrap-wysihtml5-rails', :git => 'git://github.com/Nerian/bootstrap-wysihtml5-rails.git'
 gem 'will_paginate'
 gem 'twitter-bootstrap-rails'
 gem 'simple_form'
