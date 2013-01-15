@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.11'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -11,13 +11,11 @@ gem 'pg'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'coffee-rails'#, '~> 3.2.1'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
   gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
   # gem 'jquery-ui-rails'
-  
+
   gem 'sass-rails'#,   '~> 3.2.3'
   gem 'uglifier', '>= 1.0.3'
 end
@@ -25,17 +23,22 @@ end
 group :development, :test do
   gem 'rspec-rails'#, '2.11.4'
   gem 'factory_girl_rails'#, '4.1.0'
-  gem 'database_cleaner'#, '0.9.1'  
+  gem 'database_cleaner'#, '0.9.1'
   gem 'hirb'
 end
 
+gem 'therubyracer', :platforms => :ruby
+gem 'less-rails'#, '~> 2.2.3'
+gem 'twitter-bootstrap-rails'
+
 gem 'sanitize'
 gem 'bootstrap-wysihtml5-rails', :require => 'bootstrap-wysihtml5-rails', :git => 'git://github.com/Nerian/bootstrap-wysihtml5-rails.git'
+
 gem 'will_paginate'
-gem 'twitter-bootstrap-rails'
 gem 'simple_form'
 gem 'smt_rails'
 gem 'jquery-rails'
+
 gem 'devise'
 gem 'cancan'
 
